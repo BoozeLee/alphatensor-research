@@ -1,5 +1,5 @@
 absl-py==2.4.0
-dm-tree==0.1.7
+dm-tree==0.1.10
 jax==0.10.0
 jaxlib==0.10.0
 numpy==2.4.4
