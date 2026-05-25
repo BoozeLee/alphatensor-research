@@ -1,20 +1,14 @@
 name: CI
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
 jobs:
-  lint-test:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.11', '3.12']
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
-          cache: pip
-      - run: pip install -r requirements.txt 2>/dev/null || true
-      - run: pip install ruff pytest
-      - run: ruff check . 2>&1 | head -30 || true
-      - run: python -m pytest 2>&1 | tail -20 || true
-
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e . && pytest
