@@ -1,2 +1,2 @@
 absl-py==2.4.0
-numpy==2.4.4
+numpy==2.4.6
